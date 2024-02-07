@@ -20,7 +20,7 @@ def send_discord_message(ad_df, webhook_url, asset_id, message, data):
     img_value = int(img_value)
 
     embed_data = {
-        "title": "Image Bypassed.",
+        "title": "Image passed.",
         "url": image_url,
         "image": {"url": image_url},
         "fields": [
