@@ -11,20 +11,22 @@ WEBHOOK_URL = ""  # Insert the webhook link from Discord
 OUT_PATH = ""  # Specify your path to the out.csv file
 
 def send_discord_message(ad_df, webhook_url, asset_id, message, data):
+
     decal_value = ad_df.loc[ad_df['ImageId'] == asset_id, 'DecalId'].iloc[0]
     img_value = ad_df.loc[ad_df['ImageId'] == asset_id, 'ImageId'].iloc[0]
-    name_value = ad_df.loc[ad_df['ImageId'] == asset_id, 'FileName'].iloc[0]
+    Name_value = ad_df.loc[ad_df['ImageId'] == asset_id, 'FileName'].iloc[0]
     image_url = data['data'][0].get('imageUrl')
 
     decal_value = int(decal_value)
     img_value = int(img_value)
+    library_url = f"https://www.roblox.com/library/{img_value}/"
 
     embed_data = {
         "title": "Image passed.",
-        "url": image_url,
+        "url": library_url,
         "image": {"url": image_url},
         "fields": [
-            {"name": "File Name", "value": f"||{name_value}||"},
+            {"name": "File Name", "value": f"||{Name_value}||"},
             {"name": "Decal Id", "value": f"||{decal_value}||"},
             {"name": "Image ID", "value": f"||{img_value}||"}
         ],
