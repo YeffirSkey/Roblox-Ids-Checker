@@ -1,4 +1,4 @@
-# Roblox Ids Checker
+# Roblox Ids Checker.
 Simple Roblox Id checker
 
 This script working with this [repo](https://github.com/Roblox-Thot/DecalUploader)
