@@ -10,6 +10,8 @@ TIME_SET = 1  # The set value of the check time
 WEBHOOK_URL = ''  # Insert the webhook link from Discord
 OUT_PATH = ''  # Specify your path to the out.csv file
 
+exit_flag = False
+
 class AssetClass():
     classes = {
         'Image': 1,
@@ -137,9 +139,8 @@ def get_asset_state(asset_id, ad_df, blocked_assets):
             elif state == 'Completed':
                 blocked_assets.add(asset_id)
                 send_discord_message(ad_df, WEBHOOK_URL, asset_id, message, data)
-                return True  # Exit flag set to True
-
-    return False  # Exit flag remains False
+                global exit_flag
+                exit_flag = True
 
 def check_assets():
     assets = {}
@@ -162,10 +163,9 @@ def check_assets():
         for thread in threads:
             thread.join()
 
-        if any(threads):
-            sys.exit()  # Exit if any thread sets the exit flag
+        if exit_flag:
+            sys.exit()
 
 if __name__ == '__main__':
     exit_flag = check_assets()
-    if exit_flag:
-        sys.exit()
+    
